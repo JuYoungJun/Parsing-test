@@ -24,13 +24,15 @@ jobs:
       run: |
         pip install feedparser gitpython
 
+    - name: Install dependencies
+      run: |
+        pip install feedparser gitpython
+
     - name: Run script
       run: python scripts/update_velog.py
       env:
-        GIT_COMMITTER_NAME: 'JuYoungJun'
-        GIT_COMMITTER_EMAIL: 'kaks162@gmail.com' 
+       GIT_COMMITTER_NAME: 'JuYoungJun'
+       GIT_COMMITTER_EMAIL: 'kaks162@gmail.com' 
 
     - name: Run new script
       run: python scripts/velog_post_parser.py  # 새로운 Python 스크립트 실행
-      env:
-        SOME_ENV_VARIABLE: 'value'  # 필요한 경우 새로운 스크립트에 대한 환경 변수 설정
