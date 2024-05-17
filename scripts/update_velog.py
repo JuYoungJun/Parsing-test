@@ -3,7 +3,6 @@ import git
 import os
 
 # 벨로그 RSS 피드 URL
-# example : rss_url = 'https://api.velog.io/rss/@soozi'
 rss_url = 'https://api.velog.io/rss/@jocker'
 
 # 깃허브 레포지토리 경로
@@ -21,6 +20,11 @@ repo = git.Repo(repo_path)
 
 # RSS 피드 파싱
 feed = feedparser.parse(rss_url)
+
+# 사용자 정보 설정
+config = repo.config_writer()
+config.set_value('user', 'name', 'Your Name')
+config.set_value('user', 'email', 'your.email@example.com')
 
 # 각 글을 파일로 저장하고 커밋
 for entry in feed.entries:
