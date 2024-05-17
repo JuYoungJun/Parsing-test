@@ -26,3 +26,6 @@ jobs:
 
     - name: Run script
       run: python scripts/update_velog.py
+      env:
+        GIT_COMMITTER_NAME: 'JuYoungJun'
+        GIT_COMMITTER_EMAIL: 'kaks162@gmail.com'
