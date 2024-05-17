@@ -3,6 +3,7 @@ import git
 import os
 
 # 벨로그 RSS 피드 URL
+# example : rss_url = 'https://api.velog.io/rss/@soozi'
 rss_url = 'https://api.velog.io/rss/@jocker'
 
 # 깃허브 레포지토리 경로
@@ -40,15 +41,5 @@ for entry in feed.entries:
         repo.git.add(file_path)
         repo.git.commit('-m', f'Add post: {entry.title}')
 
-# Git 사용자 정보 설정
-repo.git.config('--global', 'user.name', 'JuYoungJun')
-repo.git.config('--global', 'user.email', 'kaks162@gmail.com')
-
-# 변경사항 커밋 및 푸시
-repo.git.add(A=True)
-repo.git.commit('-m', 'Update Velog posts')
-repo.remotes.origin.push(refspec='HEAD:main')
-
-# GitHub 액세스 토큰을 사용하여 푸시
-access_token = os.getenv('GH_PAT')  # 환경 변수로부터 액세스 토큰을 가져옴
-repo.remotes.origin.push('main', set_upstream=True, access_token=access_token)
+# 변경 사항을 깃허브에 푸시
+repo.git.push()
