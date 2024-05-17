@@ -41,8 +41,8 @@ for entry in feed.entries:
         repo.git.commit('-m', f'Add post: {entry.title}')
 
 # Git 사용자 정보 설정
-repo.git.config('--local', 'user.name', 'JuYoungJun')
-repo.git.config('--local', 'user.email', 'kaks162@gmail.com')
+repo.git.config('--global', 'user.name', 'JuYoungJun')
+repo.git.config('--global', 'user.email', 'kaks162@gmail.com')
 
 # GitHub 액세스 토큰을 사용하여 푸시
 access_token = os.getenv('GH_PAT')  # 환경 변수로부터 액세스 토큰을 가져옴
