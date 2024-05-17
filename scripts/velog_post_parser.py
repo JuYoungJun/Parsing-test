@@ -51,7 +51,7 @@ else:
             # 기존 Velog Posts 섹션 내용을 찾아서 대체
             new_content = content[:start_index]
             for post_title, post_link in new_post_links:
-                if f"[{post_title}]" in content:
+                if f"{post_title}" in content:
                     # 이미 README.md에 해당 포스트가 있으면 덮어쓰기
                     content = content.replace(
                         f"- [{post_title}]({post_link})", 
