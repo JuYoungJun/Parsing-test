@@ -30,7 +30,7 @@ def get_velog_post_links():
             post_title = file_name.replace(".md", "")
             # Velog 포스트 링크 생성
             post_link = f"https://velog.io/@jocker/{quote(post_title)}"
-            post_links.append(f"- [{post_title}]({post_link})\n")
+            post_links.append((post_title, post_link))
     
     return post_links
 
@@ -48,9 +48,25 @@ else:
         end_index = content.find("###", start_index + 1) if start_index != -1 else -1
         
         if start_index != -1 and end_index != -1:
-            updated_content = content[:end_index] + "\n".join(new_post_links) + content[end_index:]
+            # 기존 Velog Posts 섹션 내용을 찾아서 대체
+            new_content = content[:start_index]
+            for post_title, post_link in new_post_links:
+                if f"[{post_title}]" in content:
+                    # 이미 README.md에 해당 포스트가 있으면 덮어쓰기
+                    content = content.replace(
+                        f"- [{post_title}]({post_link})", 
+                        f"- [{post_title}]({post_link})"
+                    )
+                else:
+                    # README.md에 해당 포스트가 없으면 추가
+                    new_content += f"- [{post_title}]({post_link})\n"
+            new_content += content[end_index:]
+            updated_content = new_content
         else:
-            updated_content = content + "\n\n### Velog Posts\n\n" + "\n".join(new_post_links)
+            # Velog Posts 섹션이 없으면 새로 생성
+            updated_content = content + "\n\n### Velog Posts\n\n"
+            for post_title, post_link in new_post_links:
+                updated_content += f"- [{post_title}]({post_link})\n"
             
         readme_file.seek(0)
         readme_file.write(updated_content)
