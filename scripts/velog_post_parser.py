@@ -8,8 +8,10 @@ readme_path = "./README.md"
 
 # README.md 파일 열기
 with open(readme_path, "a") as readme_file:
-    readme_file.write("\n\n### Velog Posts\n\n")  # 벨로그 포스트 섹션 시작
-    
+    # 기존 내용이 있는지 확인하고, 없다면 Velog Posts 섹션을 추가합니다.
+    if os.path.getsize(readme_path) == 0:
+        readme_file.write("### Velog Posts\n\n")
+
     # 상위 디렉토리 내의 파일 목록 가져오기
     for file_name in os.listdir(posts_directory):
         # 파일 경로 생성
