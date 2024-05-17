@@ -17,5 +17,7 @@ with open(readme_path, "a") as readme_file:
         
         # 파일이 디렉토리가 아니고, 파일 이름이 ".md"로 끝나는 경우에만 처리
         if os.path.isfile(file_path) and file_name.endswith(".md"):
-            # 파일 이름을 README.md 파일에 추가
-            readme_file.write(f"- {file_name}\n")
+            # 파일 이름을 README.md 파일에 추가하고 링크 생성
+            post_title = file_name.replace(".md", "")
+            post_link = f"[{post_title}]({file_path})"  # 포스트 제목으로 링크 생성
+            readme_file.write(f"- {post_link}\n")
