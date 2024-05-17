@@ -19,18 +19,18 @@ jobs:
       env:
         GH_PAT: ${{ secrets.GH_PAT }}
       run: |
-       git config --global user.name 'JuYoungJun'
-       git config --global user.email 'kaks162@gmail.com'
-       git push https://${GH_PAT}@github.com/rimgosu/velog.git
+        git config --global user.name 'JuYoungJun'
+        git config --global user.email 'kaks162@gmail.com'
+        git push https://${GH_PAT}@github.com/rimgosu/velog.git
 
-       - name: Set up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.X'
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.X'
 
-       - name: Install dependencies
-        run: |
+    - name: Install dependencies
+      run: |
         pip install feedparser gitpython
 
-       - name: Run script
-        run: python scripts/update_velog.py
+    - name: Run script
+      run: python scripts/update_velog.py
