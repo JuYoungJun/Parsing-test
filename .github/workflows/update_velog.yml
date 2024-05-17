@@ -22,11 +22,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install feedparser gitpython
-
-    - name: Install dependencies
-      run: |
-        pip install feedparser gitpython
+        pip install feedparser gitpython requests
 
     - name: Run script
       run: python scripts/update_velog.py
@@ -35,4 +31,6 @@ jobs:
        GIT_COMMITTER_EMAIL: 'kaks162@gmail.com' 
 
     - name: Run new script
-      run: python scripts/velog_post_parser.py  # 새로운 Python 스크립트 실행
+      run: |
+        pip install -r requirements.txt
+        python scripts/velog_post_parser.py
