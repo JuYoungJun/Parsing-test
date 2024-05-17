@@ -1,5 +1,6 @@
 import os
 import requests
+from urllib.parse import quote
 
 # GitHub Personal Access Token 가져오기
 GH_PAT = os.getenv('GH_PAT')
@@ -28,7 +29,7 @@ def get_velog_post_links():
             file_name = item["name"]
             post_title = file_name.replace(".md", "")
             # Velog 포스트 링크 생성
-            post_link = f"https://velog.io/@jocker/{post_title}"
+            post_link = f"https://velog.io/@jocker/{quote(post_title)}"
             post_links.append(f"- [{post_title}]({post_link})\n")
     
     return post_links
