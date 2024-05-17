@@ -1,0 +1,4 @@
+feedparser
+gitpython
+requests
+beautifulsoup4
