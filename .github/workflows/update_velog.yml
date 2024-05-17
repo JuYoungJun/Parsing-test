@@ -29,15 +29,14 @@ jobs:
       env:
         GH_PAT: ${{ secrets.GH_PAT }}
 
-    - name: Commit changes
+    - name: Resolve merge conflicts in README.md
       run: |
-        git config --global user.name 'JuYoungJun'
-        git config --global user.email 'kaks162@gmail.com'
-        git stash  # 로컬 변경 사항을 임시로 저장
-        git pull origin main  # 원격 저장소의 변경 사항을 로컬로 가져옴
-        git stash pop  # 임시로 저장한 변경 사항을 다시 적용
+        git checkout --theirs README.md
         git add README.md
-        git commit -m 'Update README.md with new Velog posts'
-        git push origin main  # 변경 사항을 다시 원격 저장소로 푸시
+        git commit -m 'Resolve merge conflict in README.md'
+      continue-on-error: true
+
+    - name: Push changes to main branch
+      run: git push origin main
       env:
         GH_PAT: ${{ secrets.GH_PAT }}
