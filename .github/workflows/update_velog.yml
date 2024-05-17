@@ -17,8 +17,8 @@ jobs:
 
     - name: Push changes
       run: |
-        git config --global user.name 'Your Name'
-        git config --global user.email 'your.email@example.com'
+        git config --global user.name 'JuYoungJun'
+        git config --global user.email 'kaks162@gmail.com'
         git push https://${{ secrets.GH_PAT }}@github.com/rimgosu/velog.git
 
     - name: Set up Python
