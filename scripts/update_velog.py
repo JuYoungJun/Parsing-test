@@ -23,8 +23,8 @@ feed = feedparser.parse(rss_url)
 
 # 사용자 정보 설정
 config = repo.config_writer()
-config.set_value('user', 'name', 'Your Name')
-config.set_value('user', 'email', 'your.email@example.com')
+config.set_value('user', 'name', 'JuYoungJun')
+config.set_value('user', 'email', 'kaks162@gmail.com')
 
 # 각 글을 파일로 저장하고 커밋
 for entry in feed.entries:
