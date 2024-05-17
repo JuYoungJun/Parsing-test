@@ -44,6 +44,11 @@ for entry in feed.entries:
 repo.git.config('--global', 'user.name', 'JuYoungJun')
 repo.git.config('--global', 'user.email', 'kaks162@gmail.com')
 
+# 변경사항 커밋 및 푸시
+repo.git.add(A=True)
+repo.git.commit('-m', 'Update Velog posts')
+repo.remotes.origin.push(refspec='HEAD:main')
+
 # GitHub 액세스 토큰을 사용하여 푸시
 access_token = os.getenv('GH_PAT')  # 환경 변수로부터 액세스 토큰을 가져옴
 repo.remotes.origin.push('main', set_upstream=True, access_token=access_token)
