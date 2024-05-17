@@ -4,7 +4,7 @@ import os
 posts_directory = "./velog-posts"
 
 # README.md 파일 경로
-readme_path = "README.md"
+readme_path = "./README.md"
 
 # README.md 파일 열기
 with open(readme_path, "a") as readme_file:
