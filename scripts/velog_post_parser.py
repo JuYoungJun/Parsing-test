@@ -1,6 +1,5 @@
 import os
 import requests
-import re
 from urllib.parse import quote_plus
 
 # GitHub Personal Access Token 가져오기
@@ -29,8 +28,10 @@ def get_velog_post_links():
         if item["type"] == "file" and item["name"].endswith(".md"):
             file_name = item["name"]
             post_title = file_name.replace(".md", "")
-            # 모든 특수문자를 제거하고 URL 인코딩 적용
-            post_title_encoded = quote_plus(re.sub(r'[^\w\s]', '', post_title))
+            # '['와 ']'를 제거하고 URL 인코딩 적용
+            post_title_encoded = quote_plus(post_title.replace('[', '').replace(']', ''))
+            # '?'와 '!'를 수동으로 인코딩 적용
+            post_title_encoded = post_title_encoded.replace('?', '%3F').replace('!', '%21')
             # Velog 포스트 링크 생성
             post_link = f"https://velog.io/@jocker/{post_title_encoded}"
             post_links.append((post_title, post_link))
