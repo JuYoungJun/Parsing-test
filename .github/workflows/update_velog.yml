@@ -22,7 +22,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install feedparser gitpython requests
+        pip install feedparser gitpython requests beautifulsoup4
 
     - name: Run script
       run: python scripts/update_velog.py
