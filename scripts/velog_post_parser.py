@@ -10,7 +10,7 @@ readme_path = "README.md"
 with open(readme_path, "a") as readme_file:
     readme_file.write("\n\n### Velog Posts\n\n")  # 벨로그 포스트 섹션 시작
     
-    # "velog-posts" 디렉토리 내의 파일 목록 가져오기
+    # 상위 디렉토리 내의 파일 목록 가져오기
     for file_name in os.listdir(posts_directory):
         # 파일 경로 생성
         file_path = os.path.join(posts_directory, file_name)
