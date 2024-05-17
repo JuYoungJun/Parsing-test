@@ -21,16 +21,20 @@ jobs:
         python-version: '3.x'
 
     - name: Install dependencies
-      run: |
-        pip install feedparser gitpython requests beautifulsoup4
-
-    - name: Run script
-      run: python scripts/update_velog.py
-      env:
-       GIT_COMMITTER_NAME: 'JuYoungJun'
-       GIT_COMMITTER_EMAIL: 'kaks162@gmail.com' 
+      run: pip install -r requirements.txt
 
     - name: Run new script
       run: |
-        pip install -r requirements.txt
         python scripts/velog_post_parser.py
+      env:
+        GH_PAT: ${{ secrets.GH_PAT }}
+
+    - name: Commit changes
+      run: |
+        git config --global user.name 'JuYoungJun'
+        git config --global user.email 'kaks162@gmail.com'
+        git add README.md
+        git commit -m 'Update README.md with new Velog posts'
+        git push
+      env:
+        GH_PAT: ${{ secrets.GH_PAT }}
