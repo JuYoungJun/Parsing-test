@@ -41,7 +41,7 @@ jobs:
         git config --global user.name "JuYoungJun"
         git checkout --theirs README.md
         git add README.md
-        git commit -m 'Resolve merge conflict in README.md'
+        git diff-index --quiet HEAD || git commit -m 'Resolve merge conflict in README.md'
       continue-on-error: true
 
     - name: Push changes to main branch
