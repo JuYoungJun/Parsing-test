@@ -23,15 +23,15 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
 
-    - name: Run new script
-      run: |
-        python scripts/velog_post_parser.py
-      env:
-        GH_PAT: ${{ secrets.GH_PAT }}
-
     - name: Run update_velog.py
       run: |
         python scripts/update_velog.py
+      env:
+        GH_PAT: ${{ secrets.GH_PAT }}
+        
+    - name: Run velog_post_parser.py
+      run: |
+        python scripts/velog_post_parser.py
       env:
         GH_PAT: ${{ secrets.GH_PAT }}
 
