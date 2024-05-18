@@ -29,6 +29,12 @@ jobs:
       env:
         GH_PAT: ${{ secrets.GH_PAT }}
 
+    - name: Run update_velog.py
+      run: |
+        python scripts/update_velog.py
+      env:
+        GH_PAT: ${{ secrets.GH_PAT }}
+
     - name: Resolve merge conflicts in README.md
       run: |
         git config --global user.email "kaks162@gmail.com"
