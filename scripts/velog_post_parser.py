@@ -47,35 +47,25 @@ else:
     with open(readme_path, "r+") as readme_file:
         content = readme_file.read()
         start_index = content.find("### Velog Posts")
-        end_index = content.find("###", start_index + 1) if start_index != -1 else -1
-        
-        if start_index != -1 and end_index != -1:
-            # 기존 Velog Posts 섹션 내용을 찾아서 대체
+        if start_index != -1:
+            # 섹션 시작과 끝 위치를 찾기
+            end_index = content.find("###", start_index + 1)
+            if end_index == -1:
+                end_index = len(content)
+            # 기존 Velog Posts 섹션 내용을 제거하고 새로운 섹션 내용 추가
             new_content = content[:start_index + len("### Velog Posts\n\n")]
-            existing_links = content[start_index:end_index]
-
             for post_title, post_link in new_post_links:
-                if post_title in existing_links:
-                    # 이미 README.md에 해당 포스트가 있으면 덮어쓰기
-                    existing_links = existing_links.replace(
-                        f"- [{post_title}](https://velog.io/@jocker/{quote_plus(post_title.replace('[', '').replace(']', '').replace('?', '').replace('!', ''))})",
-                        f"- [{post_title}]({post_link})"
-                    )
-                else:
-                    # README.md에 해당 포스트가 없으면 추가
-                    new_content += f"- [{post_title}]({post_link})\n"
-
-            new_content += existing_links.split("\n", 1)[1]
+                new_content += f"- [{post_title}]({post_link})\n"
             new_content += content[end_index:]
-            updated_content = new_content
         else:
             # Velog Posts 섹션이 없으면 새로 생성
-            updated_content = content + "\n\n### Velog Posts\n\n"
+            new_content = content + "\n\n### Velog Posts\n\n"
             for post_title, post_link in new_post_links:
-                updated_content += f"- [{post_title}]({post_link})\n"
-            
+                new_content += f"- [{post_title}]({post_link})\n"
+        
+        # 파일에 새 내용 쓰기
         readme_file.seek(0)
-        readme_file.write(updated_content)
+        readme_file.write(new_content)
         readme_file.truncate()
         
     print("README.md 파일이 성공적으로 수정되었습니다.")
