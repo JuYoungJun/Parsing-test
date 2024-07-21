@@ -58,13 +58,14 @@ else:
                 if post_title in existing_links:
                     # 이미 README.md에 해당 포스트가 있으면 덮어쓰기
                     existing_links = existing_links.replace(
-                        f"- [{post_title}]",
+                        f"- [{post_title}](https://velog.io/@jocker/{quote_plus(post_title.replace('[', '').replace(']', '').replace('?', '').replace('!', ''))})",
                         f"- [{post_title}]({post_link})"
                     )
                 else:
                     # README.md에 해당 포스트가 없으면 추가
                     new_content += f"- [{post_title}]({post_link})\n"
 
+            new_content += existing_links.split("\n", 1)[1]
             new_content += content[end_index:]
             updated_content = new_content
         else:
