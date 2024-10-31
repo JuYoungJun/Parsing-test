@@ -120,9 +120,9 @@ else:
     try:
         with open(readme_path, "r+", encoding="utf-8") as readme_file:
             content = readme_file.read()
+            print("현재 README.md 내용:\n", content)  # 현재 내용을 출력하여 확인
+            
             start_index = content.find("### Velog Posts")
-
-            # 새로운 내용을 추가할 문자열 생성
             new_content = "\n\n### Velog Posts\n\n"
             for post_title, post_link in new_post_links:
                 new_content += f"- [{post_title}]({post_link})\n"
