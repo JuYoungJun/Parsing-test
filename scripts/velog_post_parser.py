@@ -100,10 +100,9 @@ def get_velog_post_links():
         if item["type"] == "file" and item["name"].endswith(".md"):
             file_name = item["name"]
             post_title = file_name.replace(".md", "")
-            post_title_encoded = quote_plus(post_title.replace('[', '').replace(']', '').replace('?', '').replace('!', '').replace('_', ' '))
-            post_title_for_link = post_title.replace(" ", "-")  # 띄어쓰기를 -로 변경
-            post_link = f"https://velog.io/@jocker/{post_title_encoded}"  # 링크 생성
-            post_links.append((post_title_for_link, post_link))  # 제목과 링크 추가
+            post_title_encoded = quote_plus(post_title.replace('[', '').replace(']', '').replace('?', '').replace('!', ''))
+            post_link = f"https://velog.io/@jocker/{post_title_encoded}"
+            post_links.append((post_title, post_link))
 
     return post_links
 
@@ -119,50 +118,43 @@ else:
         with open(readme_path, "r+", encoding="utf-8") as readme_file:
             content = readme_file.read()
             start_index = content.find("### Velog Posts")
-
-            # 기존 링크를 추출하기 위한 세트
             existing_links = set()
 
+            # 기존 Velog Posts 섹션에서 링크 추출
             if start_index != -1:
                 end_index = content.find("###", start_index + 1)
                 if end_index == -1:
                     end_index = len(content)
                 existing_content = content[start_index:end_index]
-
+                
                 for line in existing_content.splitlines():
                     if line.startswith("- ["):
                         link_title = line.split("](")[0][2:]  # '[title]'에서 title 추출
                         existing_links.add(link_title)
 
             # 새로운 내용을 추가할 문자열 생성
-            if start_index == -1:
-                # 섹션이 없으면 생성
-                new_content = "\n\n### Velog Posts\n\n"
-            else:
-                new_content = ""
-
+            new_content = "\n\n### Velog Posts\n\n"
             for post_title, post_link in new_post_links:
                 if post_title not in existing_links:  # 중복 체크
                     new_content += f"- [{post_title}]({post_link})\n"
 
-            if new_content:  # 새로운 내용이 있으면 파일에 추가
-                if start_index == -1:
-                    readme_file.write(new_content)  # 섹션이 없으면 새로 추가
-                    print("README.md 파일에 Velog Posts 섹션이 추가되었습니다.")
-                else:
-                    # 기존 섹션에 내용을 추가
-                    updated_content = (
-                        content[:start_index + len("### Velog Posts\n\n")] +
-                        new_content +
-                        content[end_index:]
-                    )
-                    readme_file.seek(0)
-                    readme_file.write(updated_content)
-                    readme_file.truncate()
-                    print("README.md 파일에 새로운 Velog 포스트 링크가 추가되었습니다.")
+            if start_index != -1:
+                # 섹션이 존재하면 해당 부분을 수정
+                updated_content = (
+                    content[:start_index + len("### Velog Posts\n\n")] +
+                    new_content +
+                    content[end_index:]
+                )
             else:
-                print("새로운 Velog 포스트 링크가 없습니다.")
+                # Velog Posts 섹션이 없으면 새로 생성
+                updated_content = content + new_content
 
+            # 파일에 새 내용 쓰기
+            readme_file.seek(0)
+            readme_file.write(updated_content)
+            readme_file.truncate()
+
+        print("README.md 파일이 성공적으로 수정되었습니다.")
     except FileNotFoundError:
         print("README.md 파일을 찾을 수 없습니다. 파일 경로를 확인하세요.")
     except Exception as e:
