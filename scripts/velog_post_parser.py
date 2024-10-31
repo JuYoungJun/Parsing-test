@@ -73,7 +73,7 @@
 
 import os
 import requests
-from urllib.parse import quote_plus
+import re
 
 # GitHub Personal Access Token 가져오기
 GH_PAT = os.getenv('GH_PAT')
@@ -100,8 +100,10 @@ def get_velog_post_links():
         if item["type"] == "file" and item["name"].endswith(".md"):
             file_name = item["name"]
             post_title = file_name.replace(".md", "")
-            post_title_encoded = quote_plus(post_title.replace('[', '').replace(']', '').replace('?', '').replace('!', ''))
-            post_link = f"https://velog.io/@jocker/{post_title_encoded}"
+            
+            # Velog 링크 생성 (제목을 변환하여 URL 형식으로)
+            post_title_formatted = re.sub(r'[^a-zA-Z0-9가-힣\s]', '', post_title).strip().replace(' ', '-')
+            post_link = f"https://velog.io/@jocker/{post_title_formatted}"
             post_links.append((post_title, post_link))
     
     return post_links
@@ -119,7 +121,6 @@ else:
             start_index = content.find("### Velog Posts")
             new_content = "\n\n### Velog Posts\n\n"
             for post_title, post_link in new_post_links:
-                # Velog 링크만 추가
                 new_content += f"- [{post_title}]({post_link})\n"
 
             if start_index != -1:
