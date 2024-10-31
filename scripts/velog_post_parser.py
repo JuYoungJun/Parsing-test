@@ -146,7 +146,7 @@ else:
             readme_file.seek(0)
             readme_file.write(updated_content)
             readme_file.truncate()
-            
+
         print("README.md 파일이 성공적으로 수정되었습니다.")
     except FileNotFoundError:
         print("README.md 파일을 찾을 수 없습니다. 파일 경로를 확인하세요.")
