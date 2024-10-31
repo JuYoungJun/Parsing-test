@@ -70,11 +70,11 @@
         
 #     print("README.md 파일이 성공적으로 수정되었습니다.")
 
-
 import os
 import requests
 import re
 import urllib.parse
+from git import Repo, GitCommandError
 
 # GitHub Personal Access Token 가져오기
 GH_PAT = os.getenv('GH_PAT')
@@ -103,9 +103,8 @@ def get_velog_post_links():
             post_title = file_name.replace(".md", "")
             
             # Velog 링크 생성 (제목을 변환하여 URL 형식으로)
-            # 모든 특수 문자를 제거하고, 띄어쓰기를 하이픈으로 대체한 후 URL 인코딩
             post_title_formatted = re.sub(r'[^a-zA-Z0-9가-힣\s]', '', post_title).strip().replace(' ', '-')
-            post_link = f"https://velog.io/@jocker/{urllib.parse.quote(post_title_formatted)}"  # URL 인코딩 적용
+            post_link = f"https://velog.io/@jocker/{urllib.parse.quote(post_title_formatted)}"
             post_links.append((post_title, post_link))
     
     return post_links
@@ -166,21 +165,21 @@ else:
 
             print("README.md 파일이 성공적으로 수정되었습니다.")
 
-            # Git 명령어를 사용하여 변경사항 커밋 및 푸시
-            os.system('git config --global user.email "kaks162@gmail.com"')
-            os.system('git config --global user.name "JuYoungJun"')
-            os.system('git add README.md')
-            commit_result = os.system('git commit -m "Update README.md with new Velog posts"')
-            
-            if commit_result == 0:
-                print("커밋이 성공적으로 이루어졌습니다.")
-                push_result = os.system('git push origin main')
-                if push_result == 0:
-                    print("변경 사항이 성공적으로 푸시되었습니다.")
-                else:
-                    print("푸시 중 오류가 발생했습니다.")
-            else:
-                print("커밋 중 오류가 발생했습니다.")
+            # Git 저장소 관리
+            repo = Repo('.')
+            try:
+                repo.git.pull()  # 원격 저장소의 변경 사항을 가져오기
+            except GitCommandError as e:
+                print(f"Git pull 중 오류 발생: {e}")
+
+            # 변경 사항을 추가하고 푸시하기
+            try:
+                repo.git.add(readme_path)
+                repo.git.commit('-m', "Update README.md with new Velog posts")
+                repo.git.push()  # 변경 사항 푸시
+                print("변경 사항이 성공적으로 푸시되었습니다.")
+            except GitCommandError as e:
+                print(f"Git push 중 오류 발생: {e}")
 
     except FileNotFoundError:
         print("README.md 파일을 찾을 수 없습니다. 파일 경로를 확인하세요.")
