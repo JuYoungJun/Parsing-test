@@ -39,7 +39,7 @@ jobs:
       run: |
         git config --global user.email "kaks162@gmail.com"
         git config --global user.name "JuYoungJun"
-        git checkout --theirs README.md
+        git checkout --theirs README.md || echo "README.md에서 충돌이 없습니다."
         git add README.md
         git diff-index --quiet HEAD || git commit -m 'Resolve merge conflict in README.md'
       continue-on-error: true
