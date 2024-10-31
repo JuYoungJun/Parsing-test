@@ -80,7 +80,6 @@ GH_PAT = os.getenv('GH_PAT')
 
 # Velog 포스트 링크를 가져오는 함수
 def get_velog_post_links():
-    # velog-posts 디렉토리의 파일 목록 가져오기
     api_url = "https://api.github.com/repos/JuYoungJun/Parsing-test/contents/velog-posts"
     headers = {
         "Authorization": f"token {GH_PAT}",
@@ -101,9 +100,7 @@ def get_velog_post_links():
         if item["type"] == "file" and item["name"].endswith(".md"):
             file_name = item["name"]
             post_title = file_name.replace(".md", "")
-            # '[', ']', '!', '?' 를 제거하고 URL 인코딩 적용
             post_title_encoded = quote_plus(post_title.replace('[', '').replace(']', '').replace('?', '').replace('!', ''))
-            # Velog 포스트 링크 생성
             post_link = f"https://velog.io/@jocker/{post_title_encoded}"
             post_links.append((post_title, post_link))
     
@@ -115,39 +112,50 @@ new_post_links = get_velog_post_links()
 if not new_post_links:
     print("새로운 Velog 포스트 링크를 가져오는 동안 오류가 발생했습니다.")
 else:
-    # README.md 파일 수정하기
     readme_path = "./README.md"
     try:
         with open(readme_path, "r+", encoding="utf-8") as readme_file:
             content = readme_file.read()
-            print("현재 README.md 내용:\n", content)  # 현재 내용을 출력하여 확인
-            
             start_index = content.find("### Velog Posts")
             new_content = "\n\n### Velog Posts\n\n"
             for post_title, post_link in new_post_links:
+                # Velog 링크만 추가
                 new_content += f"- [{post_title}]({post_link})\n"
 
             if start_index != -1:
-                # 섹션이 존재하면 해당 부분을 수정
                 end_index = content.find("###", start_index + 1)
                 if end_index == -1:
                     end_index = len(content)
-                # 기존 Velog Posts 섹션 내용을 제거하고 새로운 섹션 내용 추가
                 updated_content = (
                     content[:start_index + len("### Velog Posts\n\n")] +
                     new_content +
                     content[end_index:]
                 )
             else:
-                # Velog Posts 섹션이 없으면 새로 생성
                 updated_content = content + new_content
 
-            # 파일에 새 내용 쓰기
             readme_file.seek(0)
             readme_file.write(updated_content)
             readme_file.truncate()
 
         print("README.md 파일이 성공적으로 수정되었습니다.")
+
+        # Git 명령어를 사용하여 변경사항 커밋 및 푸시
+        os.system('git config --global user.email "kaks162@gmail.com"')
+        os.system('git config --global user.name "JuYoungJun"')
+        os.system('git add README.md')
+        commit_result = os.system('git commit -m "Update README.md with new Velog posts"')
+        
+        if commit_result == 0:
+            print("커밋이 성공적으로 이루어졌습니다.")
+            push_result = os.system('git push origin main')
+            if push_result == 0:
+                print("변경 사항이 성공적으로 푸시되었습니다.")
+            else:
+                print("푸시 중 오류가 발생했습니다.")
+        else:
+            print("커밋 중 오류가 발생했습니다.")
+
     except FileNotFoundError:
         print("README.md 파일을 찾을 수 없습니다. 파일 경로를 확인하세요.")
     except Exception as e:
