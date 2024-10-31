@@ -9,6 +9,27 @@ test
 
 ### Velog Posts
 
+- [GitHub 기초: Git 기본 명령어와 워크플로우](https://velog.io/@jocker/GitHub-기초-Git-기본-명령어와-워크플로우)
+- [GitHub 기초: 소개 및 기본 설정](https://velog.io/@jocker/GitHub-기초-소개-및-기본-설정)
+- [HTML 태그 모음](https://velog.io/@jocker/HTML-태그-모음)
+- [Parsing-test 입니다](https://velog.io/@jocker/Parsingtest-입니다)
+- [[HTML]시리즈: 태그와 속성](https://velog.io/@jocker/HTML시리즈-태그와-속성)
+- [[HTM]시리즈: 기초 입문](https://velog.io/@jocker/HTM시리즈-기초-입문)
+- [[JAVA] Java Virtual Machine (JVM) 개요: 구조, 장점, 동작 방식](https://velog.io/@jocker/JAVA-Java-Virtual-Machine-JVM-개요-구조-장점-동작-방식)
+- [[JAVA]0.자바란?](https://velog.io/@jocker/JAVA0자바란)
+- [[JAVA]1-1. JDK설치](https://velog.io/@jocker/JAVA11-JDK설치)
+- [프로그래머스 기초 문제 시리즈: 나머지 구하기](https://velog.io/@jocker/프로그래머스-기초-문제-시리즈-나머지-구하기)
+- [프로그래머스 기초 문제 시리즈: 두 수의 곱](https://velog.io/@jocker/프로그래머스-기초-문제-시리즈-두-수의-곱)
+- [프로그래머스 기초 문제 시리즈: 두 수의 나눗셈](https://velog.io/@jocker/프로그래머스-기초-문제-시리즈-두-수의-나눗셈)
+- [프로그래머스 기초 문제 시리즈: 두 수의 차](https://velog.io/@jocker/프로그래머스-기초-문제-시리즈-두-수의-차)
+- [프로그래머스 기초 문제 시리즈: 두 수의 합](https://velog.io/@jocker/프로그래머스-기초-문제-시리즈-두-수의-합)
+- [프로그래머스 기초 문제 시리즈: 몫 구하기](https://velog.io/@jocker/프로그래머스-기초-문제-시리즈-몫-구하기)
+- [프로그래머스 기초 문제 시리즈: 배열 두배 만들기](https://velog.io/@jocker/프로그래머스-기초-문제-시리즈-배열-두배-만들기)
+- [프로그래머스 기초 문제 시리즈: 분수의 덧셈](https://velog.io/@jocker/프로그래머스-기초-문제-시리즈-분수의-덧셈)
+- [프로그래머스 기초 문제 시리즈: 숫자 비교하기](https://velog.io/@jocker/프로그래머스-기초-문제-시리즈-숫자-비교하기)
+- [프로그래머스 기초 문제 풀이 시리즈: 첫걸음과 목표 설정](https://velog.io/@jocker/프로그래머스-기초-문제-풀이-시리즈-첫걸음과-목표-설정)
+### Velog Posts
+
 - [GitHub 기초: Git 기본 명령어와 워크플로우](https://velog.io/@jocker/GitHub+%EA%B8%B0%EC%B4%88%3A+Git+%EA%B8%B0%EB%B3%B8+%EB%AA%85%EB%A0%B9%EC%96%B4%EC%99%80+%EC%9B%8C%ED%81%AC%ED%94%8C%EB%A1%9C%EC%9A%B0)
 - [GitHub 기초: 소개 및 기본 설정](https://velog.io/@jocker/GitHub+%EA%B8%B0%EC%B4%88%3A+%EC%86%8C%EA%B0%9C+%EB%B0%8F+%EA%B8%B0%EB%B3%B8+%EC%84%A4%EC%A0%95)
 - [HTML 태그 모음](https://velog.io/@jocker/HTML+%ED%83%9C%EA%B7%B8+%EB%AA%A8%EC%9D%8C)
