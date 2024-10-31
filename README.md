@@ -1,12 +1,5 @@
 # Parsing-test
 
-test
-
-
-### Velog Posts
-
-
-
 ### Velog Posts
 
 - [GitHub 기초: Git 기본 명령어와 워크플로우](https://velog.io/@jocker/GitHub-기초-Git-기본-명령어와-워크플로우)
