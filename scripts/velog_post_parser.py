@@ -104,7 +104,7 @@ def get_velog_post_links():
             
             # Velog 링크 생성 (제목을 변환하여 URL 형식으로)
             # post_title_formatted = re.sub(r'[^a-zA-Z0-9가-힣\s]', '', post_title).strip().replace(' ', '-')
-            post_title_formatted = re.sub(r':', '', post_title).strip().replace(' ', '-')
+            post_title_formatted = re.sub(r'[^a-zA-Z0-9가-힣\s.-]', '', post_title).strip().replace(' ', '-')
             post_link = f"https://velog.io/@jocker/{urllib.parse.quote(post_title_formatted)}"
             post_links.append((post_title, post_link))
     
