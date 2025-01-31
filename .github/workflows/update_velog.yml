@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - main
-  schedule:
-    - cron: '* * * * *' 
+  # schedule:
+  #   - cron: '* * * * *' # 주석 처리하여 자동 실행 비활성화
 
 jobs:
   update_blog:
@@ -26,14 +26,14 @@ jobs:
     - name: Run update_velog.py
       run: |
         python scripts/update_velog.py
-      env:
-        GH_PAT: ${{ secrets.GH_PAT }}
-        
+      # env:
+      #   GH_PAT: ${{ secrets.GH_PAT }} # 주석 처리하여 PAT 사용 비활성화
+
     - name: Run velog_post_parser.py
       run: |
         python scripts/velog_post_parser.py
-      env:
-        GH_PAT: ${{ secrets.GH_PAT }}
+      # env:
+      #   GH_PAT: ${{ secrets.GH_PAT }} # 주석 처리하여 PAT 사용 비활성화
 
     - name: Resolve merge conflicts in README.md
       run: |
@@ -46,5 +46,5 @@ jobs:
 
     - name: Push changes to main branch
       run: git push origin main
-      env:
-        GH_PAT: ${{ secrets.GH_PAT }}
+      # env:
+      #   GH_PAT: ${{ secrets.GH_PAT }} # 주석 처리하여 PAT 사용 비활성화
